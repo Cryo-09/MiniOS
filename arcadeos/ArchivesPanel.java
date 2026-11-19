@@ -238,7 +238,7 @@ public class ArchivesPanel extends JPanel {
                 } else if (code == KeyEvent.VK_M) {
                     openManual(cards[currentStageIndex].tabIndex, currentStageIndex);
                 } else if (code == KeyEvent.VK_Q) {
-                    parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ);
+                    parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ_DIFFICULTY);
                 } else if (code == KeyEvent.VK_ESCAPE) {
                     parentFrame.showScreen(ArcadeOS.SCREEN_MAIN_MENU);
                 } else if (code == KeyEvent.VK_C) {
@@ -549,7 +549,7 @@ public class ArchivesPanel extends JPanel {
                             return;
                         } else if (quizBtnBounds.contains(p)) {
                             playBlip();
-                            parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ);
+                            parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ_DIFFICULTY);
                             return;
                         }
                     }

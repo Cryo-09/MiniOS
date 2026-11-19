@@ -1,7 +1,6 @@
 package arcadeos;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 /**
@@ -17,8 +16,9 @@ public class ArcadeOS extends JFrame {
     public static final String SCREEN_LOGIN       = "SCREEN_LOGIN";
     public static final String SCREEN_MAIN_MENU   = "SCREEN_MAIN_MENU";
     public static final String SCREEN_ARCHIVES    = "SCREEN_ARCHIVES";
-    public static final String SCREEN_SIMULATOR   = "SCREEN_SIMULATOR";
-    public static final String SCREEN_QUIZ        = "SCREEN_QUIZ";
+    public static final String SCREEN_SIMULATOR       = "SCREEN_SIMULATOR";
+    public static final String SCREEN_QUIZ_DIFFICULTY = "SCREEN_QUIZ_DIFFICULTY";
+    public static final String SCREEN_QUIZ            = "SCREEN_QUIZ";
 
     private JPanel rootCardPanel;
     private CardLayout rootCardLayout;
@@ -28,6 +28,7 @@ public class ArcadeOS extends JFrame {
     private MainMenuPanel mainMenuPanel;
     private ArchivesPanel archivesPanel;
     private SimulatorContainerPanel simulatorPanel;
+    private QuizDifficultyPanel quizDifficultyPanel;
     private QuizPanel quizPanel;
 
     public ArcadeOS() {
@@ -47,19 +48,21 @@ public class ArcadeOS extends JFrame {
         rootCardPanel.setBackground(RetroTheme.BG_DARK);
 
         // Initialize all Screens
-        systemInitPanel = new SystemInitPanel(this);
-        loginPanel      = new LoginPanel(this);
-        mainMenuPanel   = new MainMenuPanel(this);
-        archivesPanel   = new ArchivesPanel(this);
-        simulatorPanel  = new SimulatorContainerPanel(this);
-        quizPanel       = new QuizPanel(this);
+        systemInitPanel     = new SystemInitPanel(this);
+        loginPanel          = new LoginPanel(this);
+        mainMenuPanel       = new MainMenuPanel(this);
+        archivesPanel       = new ArchivesPanel(this);
+        simulatorPanel      = new SimulatorContainerPanel(this);
+        quizDifficultyPanel = new QuizDifficultyPanel(this);
+        quizPanel           = new QuizPanel(this);
 
-        rootCardPanel.add(systemInitPanel, SCREEN_SYSTEM_INIT);
-        rootCardPanel.add(loginPanel,      SCREEN_LOGIN);
-        rootCardPanel.add(mainMenuPanel,   SCREEN_MAIN_MENU);
-        rootCardPanel.add(archivesPanel,   SCREEN_ARCHIVES);
-        rootCardPanel.add(simulatorPanel,  SCREEN_SIMULATOR);
-        rootCardPanel.add(quizPanel,       SCREEN_QUIZ);
+        rootCardPanel.add(systemInitPanel,     SCREEN_SYSTEM_INIT);
+        rootCardPanel.add(loginPanel,          SCREEN_LOGIN);
+        rootCardPanel.add(mainMenuPanel,       SCREEN_MAIN_MENU);
+        rootCardPanel.add(archivesPanel,       SCREEN_ARCHIVES);
+        rootCardPanel.add(simulatorPanel,      SCREEN_SIMULATOR);
+        rootCardPanel.add(quizDifficultyPanel, SCREEN_QUIZ_DIFFICULTY);
+        rootCardPanel.add(quizPanel,           SCREEN_QUIZ);
 
         add(rootCardPanel, BorderLayout.CENTER);
 
@@ -71,9 +74,22 @@ public class ArcadeOS extends JFrame {
         if (name.equals(SCREEN_ARCHIVES) && archivesPanel != null) {
             archivesPanel.updateCounters();
         }
+        if (name.equals(SCREEN_QUIZ_DIFFICULTY) && quizDifficultyPanel != null) {
+            quizDifficultyPanel.onShow();
+        }
+        if (name.equals(SCREEN_QUIZ) && quizPanel != null) {
+            quizPanel.onShowQuizScreen();
+        }
         rootCardLayout.show(rootCardPanel, name);
         rootCardPanel.revalidate();
         rootCardPanel.repaint();
+    }
+
+    public void startQuizWithDifficulty(QuizManager.Difficulty diff) {
+        if (quizPanel != null) {
+            quizPanel.setDifficulty(diff);
+        }
+        showScreen(SCREEN_QUIZ);
     }
 
     public void loadManualExample(int manualIndex) {

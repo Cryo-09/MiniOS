@@ -819,7 +819,7 @@ public class MainMenuPanel extends JPanel {
         if (index == 0) {
             parentFrame.showScreen(ArcadeOS.SCREEN_ARCHIVES);
         } else if (index == 1) {
-            parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ);
+            parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ_DIFFICULTY);
         } else if (index == 2) {
             showAboutSystemDialog();
         } else if (index == 3) {

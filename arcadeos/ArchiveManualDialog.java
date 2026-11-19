@@ -462,7 +462,7 @@ public class ArchiveManualDialog extends JDialog {
         btnQuiz.addActionListener(e -> {
             markManualRead();
             dispose();
-            if (parentFrame != null) parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ);
+            if (parentFrame != null) parentFrame.showScreen(ArcadeOS.SCREEN_QUIZ_DIFFICULTY);
         });
         actionsBox.add(btnQuiz);
 

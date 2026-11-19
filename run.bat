@@ -2,8 +2,10 @@
 title Arcade OS - 8-Bit Retro Operating System Simulator
 echo Starting Arcade OS Simulator...
 
-if exist "C:\Program Files\Java\jdk-24\bin\java.exe" (
-    set "PATH=C:\Program Files\Java\jdk-24\bin;%PATH%"
+for /d %%D in ("C:\Program Files\Java\jdk*") do (
+    if exist "%%D\bin\java.exe" (
+        set "PATH=%%D\bin;%PATH%"
+    )
 )
 
 if exist ArcadeOS.jar (
